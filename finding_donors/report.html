@@ -13097,7 +13097,7 @@ It is a ratio of true positives(words classified as spam, and which are actually
 </li>
 </ul>
 <ul>
-<li><p>I chose k-NN as my first model as it is one of the simplest and easy to use models. Besides, as we don't have a large dataset it would be quick and easy to implement k-NN with useful results.</p>
+<li><p>k-NN is a good candidate because it will be easier for k-NN to create 2 distinct clusters. Also, as there are more records for one type than the other, it will make the algos job easier and quicker.</p>
 </li>
 <li><p><strong> References </strong></p>
 <ul>
@@ -13125,7 +13125,7 @@ It is a ratio of true positives(words classified as spam, and which are actually
 <li>Relies on transformations for non-linear features</li>
 </ul>
 </li>
-<li><p>I chose this model as a candidate for this problem based on the knowledge that our data has been cleaned and now has 2-labels (0 and 1) specifying whether the donor earns more that 50k or less. All the categorical variables have been transformed using the 1-hot-encoding scheme as well so the model will not have any problems using them as well. Logreg being a very simple yet powerful model should perform well with this problem.</p>
+<li><p>All the categorical variables have been transformed using the 1-hot-encoding scheme as well so the model will not have any problems using them as well. Logreg being a very simple yet powerful model should perform well with this problem. Also, being a widely accepted algo it would be good to set a baseline using it.</p>
 </li>
 <li><p><strong> References </strong></p>
 <ul>
@@ -14121,7 +14121,7 @@ Logreg on the other hand has the fastest training/predicting time. Although bein
 <li>###### Random Forest
 RF has a higher training time as compared to Logreg but lower than that of k-NN. RF is definitely a bit complicated model as compared to all others selected and it shows that here. It's taking time to train the various Decision Trees on the dataset and then getting the ensemble decision from all those trees. On the prediction side, it performs at par to the Logreg model.</li>
 </ul>
-<p>Based on the above visualization and discussion, we can consider using Logreg and RF both as  more suitable algos for this problem. k-NN is good, but being a slow learner and also being the dataset is more biased towards the users who make less than $50K, I don't think it's a suitable algo for this problem. RF is a slow learner (as compared to Logreg) but still it may perform better with some model tuning.</p>
+<p>Based on the above visualization and discussion, we can consider using Logreg and RF both as  more suitable algos for this problem. k-NN is good, but being a slow learner and also being the dataset is more biased towards the users who make less than $50K, I don't think it's a suitable algo for this problem. RF is also a slow learner (as compared to Logreg) and that does not add any benefit to the model performance so we can skip this as well. The finally chosen algo for this problem would be <em>Logistic Regression</em>.</p>
 
 </div>
 </div>
@@ -14145,47 +14145,12 @@ RF has a higher training time as compared to Logreg but lower than that of k-NN.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong></p>
-<p>So basically the problem we had at hands was the need to figure out the list of donors who are more likely to donate to your charity so that you can direct requests to them only. Based on your earlier research you have already figured out that people who make more that <code>$50K</code> are more likely to donate, so the task for this model would be to select potential candidates from a list and select only those who make more than <code>$50K</code>. This will definitely help reduce the amount of paperwork you have to do for every request as the number of requests would be limited and also there would be more chances of getting a charitable donation.</p>
-<p>Based on the problem and the data provided, I have trained a model using the <code>Logisitc Regression</code> algorithm. I had to clean up the data a bit so as for the algo to accept it and learn on it easily. Basically, I had to convert the categorical variables (the non-numeric variables) into numeric ones using <code>one-hot encoding</code>. One-hot encoding creates a <em>"dummy"</em> variable for each possible category of each non-numeric feature. For example, assume <code>someFeature</code> has three possible entries: <code>A</code>, <code>B</code>, or <code>C</code>. We then encode this feature into <code>someFeature_A</code>, <code>someFeature_B</code> and <code>someFeature_C</code>.</p>
-<table>
-<thead><tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">someFeature</th>
-<th></th>
-<th style="text-align:center">someFeature_A</th>
-<th style="text-align:center">someFeature_B</th>
-<th style="text-align:center">someFeature_C</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">B</td>
-<td></td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">C</td>
-<td>----&gt; one-hot encode ----&gt;</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">A</td>
-<td></td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-</tr>
-</tbody>
-</table>
-<p>The categorical output var - <code>income</code>, has also been converted to a numeric (0/1) binary outcome. The algo was trained using a 80% of this processed data and tested on the remaining 20%. The final model has an accuracy more than 80% (which is good). I am still planning on improving the model performance by fine tuning the model parameters which might lead us to a higher accuracy rate.</p>
+<p>I selected Logistic Regression(Logreg) to solve this problem</p>
+<ul>
+<li>Logistic regression should not be confused with <em>actual regression</em>, which tries to predict the output of a certain numerical variable based on a set of inputs. Instead, logreg's output is a probability which specifies whether a given input point belongs to a certain class or not. So it is a valid algo for our problem.</li>
+<li>The main idea behind Logreg is the assumption that the input space can be separated into two <code>regions</code> - one for each class, by a linear boundary. For a 2-dimension space, it means a straight-line and for 3-dimensions a plane. The data points MUST be separable into regions by a linear boundary.</li>
+<li>Checkout this <a href="https://codesachin.wordpress.com/2015/08/16/logistic-regression-for-dummies/">blog post</a> to learn more about Logreg and the math behind it.</li>
+</ul>
 
 </div>
 </div>
